@@ -1,6 +1,7 @@
 const express = require("express");
 const dbConnect = require("./confing/database")
  const userRoutes = require("./routes/userRoutes")
+ const chatRoutes = require('../backend/routes/chatRoutes')
 
 require("dotenv").config();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 
 const PORT = process.env.PORT || 4000;

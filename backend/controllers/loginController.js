@@ -1,3 +1,4 @@
+const generateToken = require("../confing/generateToken");
 const User = require("../models/userModel");
 
 exports.authUser = async(req, res) => {
@@ -25,6 +26,7 @@ exports.authUser = async(req, res) => {
                     name : user.name,
                     email : user.email,
                     pic : user.image,
+                    token : generateToken(user._id),
                     message : " Authentication Success"
                 })
             }else{

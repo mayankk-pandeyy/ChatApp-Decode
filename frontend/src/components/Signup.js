@@ -83,18 +83,22 @@ const Signup = () => {
 
         if(name === ""){
             toast.warn("Please Enter Your Name");
+            return;
         }
 
         if(email === ""){
             toast.info("Please Enter Your Email");
+            return;
         }
 
         if(password === ""){
             toast.error("Please Enter Your Password");
+            return;
         }
 
         if(password !== confirmPassword){
             toast.error("Passwords do not Match");
+            return;
         }
 
         try{

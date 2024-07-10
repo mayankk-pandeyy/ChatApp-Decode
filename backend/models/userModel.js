@@ -21,7 +21,7 @@ const userModel = mongoose.Schema(
         type : String,
         required : true
       },
-      image : {
+      pic : {
         type : String,
         required : true,
         default : "https://avatarfiles.alphacoders.com/375/thumb-350-375269.webp",
