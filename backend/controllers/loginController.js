@@ -25,7 +25,7 @@ exports.authUser = async(req, res) => {
                     id : user._id,
                     name : user.name,
                     email : user.email,
-                    pic : user.image,
+                    pic : user.pic,
                     token : generateToken(user._id),
                     message : " Authentication Success"
                 })

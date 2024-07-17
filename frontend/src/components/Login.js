@@ -52,8 +52,11 @@ const Login = () => {
                 }
             }
 
-            await axios.post("/api/user/login", {email, password}, config);
-            toast.success("New User Created Successfully");
+            const {data} = await axios.post("/api/user/login", {email, password}, config);
+            toast.success("Login Successfull");
+
+            localStorage.setItem('userInfo', JSON.stringify(data));
+
             setLoading(false);
             history.push("/chats");
             

@@ -118,7 +118,9 @@ const Signup = () => {
                 userDataSend = {name, email, password, pic};
             }
 
-            await axios.post("/api/user", userDataSend, config);
+            const {data} = await axios.post("/api/user", userDataSend, config);
+
+            localStorage.setItem('userInfo', JSON.stringify(data));
 
             toast.success("New User Created Successfully");
             setLoading(false);
