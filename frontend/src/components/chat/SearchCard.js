@@ -1,14 +1,46 @@
 import React, { useState } from 'react'
 import { ChatState } from '../../context/ChatProvider';
+import { ToastContainer, toast } from 'react-toast'
+import axios from 'axios'
 
 const SearchCard = () => {
 
     const [searchUser, setSearchUser] = useState("");
+    const [Loading, setLoading] = useState(false);
+    const [fetchedUsers, setFetchedUsers] = useState([]);
 
     const {user} = ChatState();
 
     function fetchUserHandler(event){
         setSearchUser(event.target.value);
+    }
+
+    async function submitHandler(){
+        if(searchUser === ""){
+            toast.error("Please Enter Something");
+            return;
+        }
+
+        try{
+            console.log("entered");
+            setLoading(true);
+            const config = {
+                headers : {
+                    Authorization : `Bearer ${user.token}`
+                }
+            }
+            console.log("data");
+            const {data}  = await axios.get(`/api/user?search=${searchUser}`, config);
+
+            setLoading(false);
+            console.log(data);
+
+            setFetchedUsers(data);
+
+        }catch(error){
+            toast.error("Error in fetching the data");
+
+        }
     }
 
   return (
@@ -22,7 +54,8 @@ const SearchCard = () => {
                 className='text-white bg-transparent outline-none border w-full px-4 py-1 rounded-2xl text-lg'
             />
             
-            <button className='bg-[#FDC433] px-3 rounded-full font-semibold' >Go</button>
+            <button className='bg-[#FDC433] px-3 rounded-full font-semibold' onClick={submitHandler}>Go</button>
+            <ToastContainer delay={3000}/>
         </div>
 
         {/* Logged In user */}
